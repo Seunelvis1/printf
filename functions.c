@@ -17,7 +17,7 @@ int print_char(va_list types, char buffer[],
 {
 	char d = va_arg(types, int);
 
-	return (handle_write_char(d, flags, width, buffer, precision, size));
+	return (handle_write_char(d, buffer, flags, width, precision, size));
 }
 /************************* PRINT A STRING *************************/
 /**
@@ -58,7 +58,7 @@ int print_string(va_list types, char buffer[],
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, &str[0], length);
+			write(1, &ptr[0], length);
 			for (j = width - length; j > 0; j--)
 				write(1, " ", 1);
 			return (width);
@@ -67,7 +67,7 @@ int print_string(va_list types, char buffer[],
 		{
 			for (j = width - length; j > 0; j--)
 				write(1, " ", 1);
-			write(1, &str[0], length);
+			write(1, &ptr[0], length);
 			return (width);
 		}
 	}
@@ -91,7 +91,7 @@ int print_percent(va_list types, char buffer[],
 	UNUSED(types);
 	UNUSED(buffer);
 	UNUSED(width);
-	UNSUED(flags);
+	UNUSED(flags);
 	UNUSED(precision);
 	UNUSED(size);
 	return (write(1, "%%", 1));
@@ -171,7 +171,7 @@ int print_binary(va_list types, char buffer[],
 	for (j = 1; j < 32; j++)
 	{
 		n /= 2;
-		a[i] = (m / n) % 2;
+		a[j] = (m / n) % 2;
 	}
 	for (j = 0, sum = 0, comp = 0; j < 32; j++)
 	{
@@ -180,11 +180,9 @@ int print_binary(va_list types, char buffer[],
 		{
 			char y = '0' + a[j];
 
-			write(1, &z, 1);
+			write(1, &y, 1);
 			comp++;
 		}
 	}
 	return (comp);
 }
-}
-

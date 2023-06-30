@@ -6,9 +6,9 @@
  * Return: 1
  */
 
-int is_printable(char c)
+int is_printable(char d)
 {
-	if (c >= 32 && c < 127)
+	if (d >= 32 && d < 127)
 		return (1);
 	return (0);
 }
@@ -20,17 +20,17 @@ int is_printable(char c)
  * @ascii_code: ascii
  * Return: 3
  */
-int append_hexa_code(char ascii_code, char buffer[], int i)
+int append_hexa_code(char ascii_code, char buffer[], int j)
 {
 	char map_to[] = "0123456789ABCDEF";
 
 	if (ascii_code < 0)
 		ascii_code *= -1;
-	buffer[i++] = '\\';
-	buffer[i] = 'x';
+	buffer[j++] = '\\';
+	buffer[j] = 'x';
 
-	buffer[i++] = map_to[ascii_code / 16];
-	buffer[i] = map_to[ascii_code % 16];
+	buffer[j++] = map_to[ascii_code / 16];
+	buffer[j] = map_to[ascii_code % 16];
 
 	return (3);
 }
@@ -41,9 +41,9 @@ int append_hexa_code(char ascii_code, char buffer[], int i)
  * Return: 0
  */
 
-int is_digit(char c)
+int is_digit(char d)
 {
-	if (c >= '0' && c <= '9')
+	if (d >= '0' && d <= '9')
 		return (1);
 	return (0);
 }
@@ -53,13 +53,13 @@ int is_digit(char c)
  * @size: type to be converted
  * Return: 0
  */
-long int convert_size_number(long int num, int size)
+long int convert_size_number(long int dig, int size)
 {
 	if (size == S_LONG)
-		return (num);
+		return (dig);
 	else if (size == S_SHORT)
-		return ((short)num);
-	return ((int)num);
+		return ((short)dig);
+	return ((int)dig);
 }
 /**
  * convert_size_unsgnd - sets number to specific size
@@ -67,11 +67,11 @@ long int convert_size_number(long int num, int size)
  * @size: size
  * Return: 0
  */
-long int convert_size_unsgnd(unsigned long int num, int size)
+long int convert_size_unsgnd(unsigned long int dig, int size)
 {
 	if (size == S_LONG)
-		return (num);
+		return (dig);
 	else if (size == S_SHORT)
-		return ((unsigned short)num);
-	return ((unsigned int)num);
+		return ((unsigned short)dig);
+	return ((unsigned int)dig);
 }
